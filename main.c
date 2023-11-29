@@ -3,6 +3,7 @@
 #include "safeinput.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 
 typedef struct{
     char cardID[20];
@@ -14,6 +15,32 @@ typedef struct{
     CARD *lista;
     int count;
 }CARDLIST;
+
+const char* currentDate(){
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    char *date =(char*)malloc(sizeof(char)*20);
+    sprintf(date, "%d-%d-%d", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday);
+    return date;
+}
+
+void addCardToList(CARD *lista, int *pcount, char *cardID, int access, const char *date){
+    int count = *pcount;
+    if(count == 0){
+        lista = malloc(sizeof(CARD));
+        strcpy(lista[0].cardID, cardID);
+        lista[0].access = access;
+        strcpy(lista[0].date, date);
+        count++;
+    }else{
+        ++count;
+        lista = realloc(lista, sizeof(CARD)* (count));
+        strcpy(lista[count-1].cardID, cardID);
+        lista[count-1].access = access;
+        strcpy(lista[count-1].date, date);
+    }
+    *pcount = count;
+}
 
 void adminAccessMenu(){
     printf("CURRENTLY LAMP IS: Orange\n");
@@ -83,9 +110,29 @@ void adminMenu(CARD *lista, int *pcount){//lista är en pekare till en array av 
             printf("index: %d\n", index);
             if(index == -1){
                 printf("Card not found!\n");
+                char answer[4];
+                while(1){
+                GetInput("Do you want to add this card to the system?:(y/n)", answer, 4);
+                if(strcmp(answer, "yes") == 0){
+                    addCardToList(lista, &count, cardNumber, 0, currentDate());//lägger till kortet i listan
+                    
+                    printf("Card added!\n");
+                    printf("\n");
+                    break;
+                    }else if(strcmp(answer, "n") == 0){
+                        printf("Card not added!\n");
+                        printf("\n");
+                        break;
+                    }else{
+                        printf("Wrong input!\n");
+                    }
+                
+                }
                 GetInputChar("Press enter to continue", NULL);
                 continue;
+    
             }else{
+
                 if(lista[index].access == 0){
                     printf("This card has no access!\n");
                     int answer;
@@ -116,26 +163,22 @@ void adminMenu(CARD *lista, int *pcount){//lista är en pekare till en array av 
                         }else{
                             printf("Wrong input!\n");
                         }
+                
                 }
-            }
-
-            // if(count == 0){
-            //     lista = malloc(sizeof(CARDLIST));
-            //     count++;
-            // }else{
-            //     ++count;
-            //     lista = realloc(lista, sizeof(CARDLIST)* (count));
-            // }
+                }
             
 
         }else if(sel == 4){
              break;
+            }else{
+            printf("Wrong input. Try again!\n");
             }
     }
-
 }
 
-int main(){
+
+int main(){  
+    printf("Current date: %s\n", currentDate()); 
     CARD lista[] = {{"23", 0, "2023-11-24"}, {"34", 1, "2023-11-24"}};
     
 
