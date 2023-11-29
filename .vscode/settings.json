@@ -1,0 +1,10 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/Users/alexanderfc/ProgrammeringC-C++/CCARD",
+            "binaryPath": "/Users/alexanderfc/ProgrammeringC-C++/CCARD/main1",
+            "binaryArgs": []
+        }
+    ],
+    "cmake.configureOnOpen": true
+}
