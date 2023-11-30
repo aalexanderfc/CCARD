@@ -2,18 +2,23 @@
 triple:          'arm64-apple-darwin'
 binary-path:     main1
 relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _currentDate, symObjAddr: 0x0, symBinAddr: 0x100002BC8, symSize: 0x98 }
-  - { offsetInCU: 0x5E, offset: 0x5E, size: 0x8, addend: 0x0, symName: _currentDate, symObjAddr: 0x0, symBinAddr: 0x100002BC8, symSize: 0x98 }
-  - { offsetInCU: 0xA2, offset: 0xA2, size: 0x8, addend: 0x0, symName: _addCardToList, symObjAddr: 0x98, symBinAddr: 0x100002C60, symSize: 0x134 }
-  - { offsetInCU: 0x10C, offset: 0x10C, size: 0x8, addend: 0x0, symName: _adminAccessMenu, symObjAddr: 0x1CC, symBinAddr: 0x100002D94, symSize: 0x6C }
-  - { offsetInCU: 0x121, offset: 0x121, size: 0x8, addend: 0x0, symName: _getCardIndex, symObjAddr: 0x238, symBinAddr: 0x100002E00, symSize: 0xA0 }
-  - { offsetInCU: 0x181, offset: 0x181, size: 0x8, addend: 0x0, symName: _adminMenu, symObjAddr: 0x2D8, symBinAddr: 0x100002EA0, symSize: 0x6C4 }
-  - { offsetInCU: 0x298, offset: 0x298, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x99C, symBinAddr: 0x100003564, symSize: 0xA0 }
-  - { offsetInCU: 0x26, offset: 0x407, size: 0x8, addend: 0x0, symName: _parseLong, symObjAddr: 0x0, symBinAddr: 0x100003604, symSize: 0xD8 }
-  - { offsetInCU: 0x63, offset: 0x444, size: 0x8, addend: 0x0, symName: _parseLong, symObjAddr: 0x0, symBinAddr: 0x100003604, symSize: 0xD8 }
-  - { offsetInCU: 0xB5, offset: 0x496, size: 0x8, addend: 0x0, symName: _parseFloat, symObjAddr: 0xD8, symBinAddr: 0x1000036DC, symSize: 0x84 }
-  - { offsetInCU: 0x107, offset: 0x4E8, size: 0x8, addend: 0x0, symName: _GetInputInt, symObjAddr: 0x15C, symBinAddr: 0x100003760, symSize: 0xF0 }
-  - { offsetInCU: 0x159, offset: 0x53A, size: 0x8, addend: 0x0, symName: _GetInput, symObjAddr: 0x24C, symBinAddr: 0x100003850, symSize: 0x1A4 }
-  - { offsetInCU: 0x1C7, offset: 0x5A8, size: 0x8, addend: 0x0, symName: _GetInputFloat, symObjAddr: 0x3F0, symBinAddr: 0x1000039F4, symSize: 0xF8 }
-  - { offsetInCU: 0x219, offset: 0x5FA, size: 0x8, addend: 0x0, symName: _GetInputChar, symObjAddr: 0x4E8, symBinAddr: 0x100003AEC, symSize: 0xC0 }
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _currentDate, symObjAddr: 0x0, symBinAddr: 0x100002604, symSize: 0x98 }
+  - { offsetInCU: 0x65, offset: 0x65, size: 0x8, addend: 0x0, symName: _cardList, symBinAddr: 0x100008000, symSize: 0x0 }
+  - { offsetInCU: 0xDC, offset: 0xDC, size: 0x8, addend: 0x0, symName: _currentDate, symObjAddr: 0x0, symBinAddr: 0x100002604, symSize: 0x98 }
+  - { offsetInCU: 0x120, offset: 0x120, size: 0x8, addend: 0x0, symName: _saveCardListToFile, symObjAddr: 0x98, symBinAddr: 0x10000269C, symSize: 0x108 }
+  - { offsetInCU: 0x160, offset: 0x160, size: 0x8, addend: 0x0, symName: _loadCardListFromFile, symObjAddr: 0x1A0, symBinAddr: 0x1000027A4, symSize: 0x100 }
+  - { offsetInCU: 0x1BC, offset: 0x1BC, size: 0x8, addend: 0x0, symName: _addCardToList, symObjAddr: 0x2A0, symBinAddr: 0x1000028A4, symSize: 0x138 }
+  - { offsetInCU: 0x242, offset: 0x242, size: 0x8, addend: 0x0, symName: _cleanupAndExit, symObjAddr: 0x3D8, symBinAddr: 0x1000029DC, symSize: 0x2C }
+  - { offsetInCU: 0x266, offset: 0x266, size: 0x8, addend: 0x0, symName: _fakeTestScanCard, symObjAddr: 0x404, symBinAddr: 0x100002A08, symSize: 0x88 }
+  - { offsetInCU: 0x28A, offset: 0x28A, size: 0x8, addend: 0x0, symName: _getCardIndex, symObjAddr: 0x48C, symBinAddr: 0x100002A90, symSize: 0xA0 }
+  - { offsetInCU: 0x2EA, offset: 0x2EA, size: 0x8, addend: 0x0, symName: _adminAccessMenu, symObjAddr: 0x52C, symBinAddr: 0x100002B30, symSize: 0x600 }
+  - { offsetInCU: 0x3BA, offset: 0x3BA, size: 0x8, addend: 0x0, symName: _adminMenu, symObjAddr: 0xB2C, symBinAddr: 0x100003130, symSize: 0x314 }
+  - { offsetInCU: 0x434, offset: 0x434, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0xE40, symBinAddr: 0x100003444, symSize: 0x80 }
+  - { offsetInCU: 0x26, offset: 0x712, size: 0x8, addend: 0x0, symName: _parseLong, symObjAddr: 0x0, symBinAddr: 0x1000034C4, symSize: 0xD8 }
+  - { offsetInCU: 0x63, offset: 0x74F, size: 0x8, addend: 0x0, symName: _parseLong, symObjAddr: 0x0, symBinAddr: 0x1000034C4, symSize: 0xD8 }
+  - { offsetInCU: 0xB5, offset: 0x7A1, size: 0x8, addend: 0x0, symName: _parseFloat, symObjAddr: 0xD8, symBinAddr: 0x10000359C, symSize: 0x84 }
+  - { offsetInCU: 0x107, offset: 0x7F3, size: 0x8, addend: 0x0, symName: _GetInputInt, symObjAddr: 0x15C, symBinAddr: 0x100003620, symSize: 0xF0 }
+  - { offsetInCU: 0x159, offset: 0x845, size: 0x8, addend: 0x0, symName: _GetInput, symObjAddr: 0x24C, symBinAddr: 0x100003710, symSize: 0x1A4 }
+  - { offsetInCU: 0x1C7, offset: 0x8B3, size: 0x8, addend: 0x0, symName: _GetInputFloat, symObjAddr: 0x3F0, symBinAddr: 0x1000038B4, symSize: 0xF8 }
+  - { offsetInCU: 0x219, offset: 0x905, size: 0x8, addend: 0x0, symName: _GetInputChar, symObjAddr: 0x4E8, symBinAddr: 0x1000039AC, symSize: 0xC0 }
 ...
