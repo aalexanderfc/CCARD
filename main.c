@@ -105,15 +105,6 @@ void addCardToList(CARDLIST *cardList, char *cardID, int access, const char *dat
     cardList->count++;
 }
 
-
-
-void fakeTestScanCard(){
-    printf("Scan card: ");
-    char cardNumber[20];
-    GetInput("Enter card number: ", cardNumber, 10);
-    printf("cardID: %s\n", cardNumber);
-    }
-
 //funktion som returnerar indexet för ett kort i listan:
 int getCardIndex(CARD *lista, int count, char *cardID) {
     for (int i = 0; i < count; i++) {
@@ -122,6 +113,26 @@ int getCardIndex(CARD *lista, int count, char *cardID) {
         }
     }
     return -1;
+}
+
+void processCard(char* cardNumber){
+    int index = getCardIndex(cardList.lista, cardList.count, cardNumber);
+    if(index == -1){
+        printf("CURRENTLY LAMP IS: Red\n");
+        sleep(1);
+        printf("\n");
+    }else{
+        if(cardList.lista[index].access == 0){
+            printf("CURRENTLY LAMP IS: Red\n");
+            sleep(1);
+            printf("\n");
+        }else{
+            printf("CURRENTLY LAMP IS: Green\n");
+            sleep(1);
+            printf("\n");
+        }
+   
+    }
 }
 //funktion som skriver ut menyn för admin:
 // return 1 if success, 0 if wrong entry
@@ -308,7 +319,17 @@ void adminMenu(CARDLIST *cardList) {
             sleep(1);
             break;
         }else if(sel == 9){
-            printf("Fake card reader");
+            char scanCard[10];
+            GetInput("CURRENTLY LAMP IS: Off\nPlease scan card to enter or X to go back to admin menu:\n", scanCard, 10);
+            if(strcmp(scanCard, "x") == 0){
+                //back
+            }else if(convertToInt(scanCard) == -1){
+                printf("Wrong input. Try again!\n");
+                sleep(1);
+            }else{
+                processCard(scanCard);
+            }
+
         }else{
             printf("Wrong input. Try again!\n");
             sleep(1);
