@@ -21,6 +21,23 @@ typedef struct {//struct för lista av kort
 
 CARDLIST cardList;
 
+int convertToInt(const char *str){//funktion som konverterar en sträng till int
+    int result = atoi(str);
+    
+    char intStr[strlen(str)+1];
+    sprintf(intStr, "%d", result);
+    if(strcmp(str, " ") == 0){
+        return -1;
+    }
+  
+    if(strlen(intStr) == strlen(str)){
+        return result;
+    }
+    else {
+        return -1;
+        }
+    }
+
 const char *currentDate() {//funktion som returnerar dagens datum
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
@@ -120,7 +137,16 @@ int adminAccessMenu(CARDLIST *cardList) {
 
     if (menuSel3 == 1) {
         char cardNumber[20];
+
+        while(1){//loop för att få rätt input
         GetInput("Enter card number: ", cardNumber, 10);
+        if(convertToInt(cardNumber) == -1){
+            printf("Wrong input. Try again!\n");
+            sleep(1);
+            }else{
+                break;
+            }
+        }
         printf("cardID: %s\n", cardNumber);
         int index = getCardIndex(cardList->lista, cardList->count, cardNumber);
         printf("index: %d\n", index);
@@ -291,15 +317,12 @@ void adminMenu(CARDLIST *cardList) {
     }
 
 int main() {
-    signal(SIGTERM, cleanupAndExit);
+    signal(SIGTERM, cleanupAndExit);//signal för att avsluta programmet
     printf("Current date: %s\n", currentDate());
     
     cardList.lista = NULL;
     cardList.count = 0;
         
-    // addCardToList(&cardList, "1023", 0, "2023-11-24", 1);
-    // addCardToList(&cardList, "1024", 1, "2023-11-24", 1);
-
     loadCardListFromFile();
 
     adminMenu(&cardList);
