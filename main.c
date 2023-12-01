@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <string.h>
-#include "safeinput.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
@@ -13,7 +11,7 @@
 CARDLIST cardList;
 
 int main() {
-    signal(SIGTERM, cleanupAndExit);//signal för att avsluta programmet
+    //signal(SIGTERM, cleanupAndExit);//signal för att avsluta programmet
     printf("Current date: %s\n", currentDate());//skriver ut dagens datum
     
     cardList.lista = NULL;
