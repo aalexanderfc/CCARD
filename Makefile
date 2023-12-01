@@ -1,5 +1,5 @@
 PROG = main1
-SRC = main.c safeinput.c adminMenu.c
+SRC = main.c safeinput.c adminMenu.c funktioner.c
 CFLAGS = -g
 LIBS = 
 

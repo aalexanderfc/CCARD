@@ -13,6 +13,6 @@ typedef struct {//struct för lista av kort
     int count;
 }CARDLIST;
 
-int convertToInt(const char *str);
+
 void adminMenu(CARDLIST *cardList);
 int adminAccessMenu(CARDLIST *cardList);
