@@ -7,7 +7,6 @@
 #include <signal.h>
 #include "adminMenu.h"
 #include "funktioner.h"
-#include "main.h"
 
 void adminMenu(CARDLIST *cardList) {//funktion för att interagera med adminmenyn
     while (1) {
@@ -34,7 +33,7 @@ void adminMenu(CARDLIST *cardList) {//funktion för att interagera med adminmeny
         } else if (sel == 2 && cardList->count == 0) {//List all cards in system
             printf("There is not registered cards in system!\n");
             sleep(1);
-        
+
         } else if (sel == 2 && cardList->count > 0) {
             listCards(cardList);
 

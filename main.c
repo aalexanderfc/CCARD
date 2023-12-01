@@ -6,7 +6,6 @@
 #include <time.h>
 #include <signal.h>
 #include "adminMenu.h"
-#include "main.h"
 #include "funktioner.h"
 
 #define FILENAME "cards.txt"

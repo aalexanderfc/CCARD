@@ -6,14 +6,13 @@
 #include <time.h>
 #include <signal.h>
 #include "adminMenu.h"
-#include "main.h"
 #include "funktioner.h"
 
 #define FILENAME "cards.txt"
 
 CARDLIST cardList;
-
-const char *currentDate() {//funktion som returnerar dagens datum
+//funktion som returnerar dagens datum:
+const char *currentDate() {
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
     char *date = (char *)malloc(sizeof(char) * 20);
@@ -21,7 +20,8 @@ const char *currentDate() {//funktion som returnerar dagens datum
     return date;
 }
 
-void saveCardListToFile() {//funktion som sparar kortlistan till fil
+//funktion som sparar kortlistan till fil:
+void saveCardListToFile() {
     FILE *file = fopen(FILENAME, "w");
     if (file == NULL) {
         perror("Error opening file for writing");
@@ -35,7 +35,8 @@ void saveCardListToFile() {//funktion som sparar kortlistan till fil
     fclose(file);
 }
 
-void loadCardListFromFile() {//funktion som läser in kortlistan från fil
+//funktion som läser in kortlistan från fil:
+void loadCardListFromFile() {
     FILE *file = fopen(FILENAME, "r");
     if (file != NULL) {
         while (!feof(file)) {
@@ -53,13 +54,14 @@ void loadCardListFromFile() {//funktion som läser in kortlistan från fil
 
 }
 
-void cleanupAndExit(int signum) {//funktion som avslutar programmet
+//funktion som avslutar programmet:
+void cleanupAndExit(int signum) {
     saveCardListToFile();
     free(cardList.lista);
     exit(0);
 }
 
-//funktion som lägger till ett kort i listan
+//funktion som lägger till ett kort i listan:
 void addCardToList(CARDLIST *cardList, char *cardID, int access, const char *date, int updateDate) {
     int count = cardList->count;
 
@@ -108,7 +110,8 @@ void processCard(char* cardNumber){//funktion som hanterar scanning av kort
     }
 }
 
-int convertToInt(const char *str){//funktion som konverterar en sträng till int
+//funktion som konverterar en sträng till int:
+int convertToInt(const char *str){
     int result = atoi(str);
     
     char intStr[strlen(str)+1];
@@ -124,7 +127,9 @@ int convertToInt(const char *str){//funktion som konverterar en sträng till int
         return -1;
         }
     }
-void addRemoveCardAccess(CARDLIST *cardList, char *cardID, int access, const char *date, int updateDate) {//funktion för att lägga till eller ta bort access till ett kort
+
+//funktion för att lägga till eller ta bort access till ett kort:
+void addRemoveCardAccess(CARDLIST *cardList, char *cardID, int access, const char *date, int updateDate) {
         char cardNumber[20];
 
         while(1){//loop för att få rätt input
@@ -240,9 +245,8 @@ void addRemoveCardAccess(CARDLIST *cardList, char *cardID, int access, const cha
         }
     }
 
-
-
-void listCards(CARDLIST *cardList){//funktion som skriver ut alla kort i listan
+//funktion som skriver ut alla kort i listan:
+void listCards(CARDLIST *cardList){
 
             for (int i = 0; i < cardList->count; i++) {
                 char accessOrNot[20];
@@ -256,7 +260,8 @@ void listCards(CARDLIST *cardList){//funktion som skriver ut alla kort i listan
                  GetInputChar("Press enter to continue", NULL);
 }
 
-void fakeTestScanCard(){//funktion för att testa att scanna ett kort och se om det finns i listan
+//funktion för att testa att scanna ett kort och se om det finns i listan:
+void fakeTestScanCard(){
     char scanCard[10];
     GetInput("CURRENTLY LAMP IS: Off\nPlease scan card to enter or X to go back to admin menu:\n", scanCard, 10);
     if(strcmp(scanCard, "x") == 0){

@@ -1,5 +1,4 @@
 #include "adminMenu.h"
-#include "main.h"
 
 int getCardIndex(CARD *lista, int count, char *cardID);
 void addCardToList(CARDLIST *cardList, char *cardID, int access, const char *date, int updateDate);
