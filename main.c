@@ -14,14 +14,14 @@ CARDLIST cardList;
 
 int main() {
     signal(SIGTERM, cleanupAndExit);//signal för att avsluta programmet
-    printf("Current date: %s\n", currentDate());
+    printf("Current date: %s\n", currentDate());//skriver ut dagens datum
     
     cardList.lista = NULL;
     cardList.count = 0;
         
-    loadCardListFromFile();
+    loadCardListFromFile();//laddar in kortlistan från fil
 
-    adminMenu(&cardList);
+    adminMenu(&cardList);//kör adminmenyn
 
    // Frigör dynamiskt allokerat minne
     free(cardList.lista);

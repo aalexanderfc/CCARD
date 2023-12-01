@@ -8,7 +8,8 @@
 #include "adminMenu.h"
 #include "funktioner.h"
 
-void adminMenu(CARDLIST *cardList) {//funktion för att interagera med adminmenyn
+//funktion för att interagera med adminmenyn:
+void adminMenu(CARDLIST *cardList) {
     while (1) {
         printf("Admin Menu:\n");
         printf("\n");
@@ -57,7 +58,8 @@ void adminMenu(CARDLIST *cardList) {//funktion för att interagera med adminmeny
         }    
     }
 
-    int adminAccessMenu(CARDLIST *cardList) {//submeny för admin innehållande add/remove access
+//submeny för admin innehållande add/remove access:
+    int adminAccessMenu(CARDLIST *cardList) {
     printf("CURRENTLY LAMP IS: Orange\n");
     printf("\n");
     printf("1. Add/remove access\n");
