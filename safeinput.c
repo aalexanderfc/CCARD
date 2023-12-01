@@ -73,30 +73,34 @@ bool GetInputChar(char* prompt, char* value)
 }
 
 
-INPUT_RESULT GetInput(char* prompt, char* buff, int maxSize)
+INPUT_RESULT GetInput(char *prompt, char *buff, int maxSize)
 {
+    if (prompt != NULL && strlen(prompt) > 0)
+    {
+        printf("%s", prompt);
+        fflush(stdout); // Flush the output buffer to ensure prompt is displayed.
+    }
 
-	if (prompt != NULL && strlen(prompt) > 0)
-	{
-		printf("%s", prompt);
-	}
-	if (fgets(buff, maxSize, stdin) == NULL || strlen(buff) == 1 && buff[0] == '\n')
-		return INPUT_RESULT_NO_INPUT; 
-    
+    if (fgets(buff, maxSize, stdin) == NULL || (strlen(buff) == 1 && buff[0] == '\n'))
+        return INPUT_RESULT_NO_INPUT;
 
-	// If it was too long, there'll be no newline. In that case, we flush
-	// to end of line so that excess doesn't affect the next call.
-	if (buff[strlen(buff) - 1] != '\n') {
-		int extra = 0;
-		char ch;
-		while (((ch = getchar()) != '\n') && (ch != EOF))
-			extra = 1;
-		return (extra == 1) ? INPUT_RESULT_TOO_LONG : INPUT_RESULT_OK;
-	}
+    // If it was too long, there'll be no newline. In that case, we flush
+    // to end of line so that excess doesn't affect the next call.
+    if (buff[strlen(buff) - 1] != '\n')
+    {
+        int extra = 0;
+        int ch;
 
-	// Otherwise remove newline and give string back to caller.
-	buff[strlen(buff) - 1] = '\0';
-	return INPUT_RESULT_OK;
+        // Discard remaining characters in the input buffer
+        while ((ch = getchar()) != '\n' && ch != EOF)
+            extra = 1;
+
+        return (extra == 1) ? INPUT_RESULT_TOO_LONG : INPUT_RESULT_OK;
+    }
+
+    // Otherwise remove newline and give string back to caller.
+    buff[strlen(buff) - 1] = '\0';
+    return INPUT_RESULT_OK;
 }
 
 
