@@ -24,20 +24,7 @@ int convertToInt(const char *str){//funktion som konverterar en sträng till int
         return -1;
         }
     }
-
-//funktion som skriver ut menyn för admin:
-// return 1 if success, 0 if wrong entry
-int adminAccessMenu(CARDLIST *cardList) {
-    printf("CURRENTLY LAMP IS: Orange\n");
-    printf("\n");
-    printf("1. Add/remove access\n");
-    printf("2. Back\n");
-    printf("\n");
-
-    int menuSel3;
-    GetInputInt("Enter choice: ", &menuSel3);
-
-    if (menuSel3 == 1) {
+void addRemoveCardAccess(CARDLIST *cardList, char *cardID, int access, const char *date, int updateDate) {//funktion för att lägga till eller ta bort access till ett kort
         char cardNumber[20];
 
         while(1){//loop för att få rätt input
@@ -51,7 +38,7 @@ int adminAccessMenu(CARDLIST *cardList) {
         }
         printf("cardID: %s\n", cardNumber);
         int index = getCardIndex(cardList->lista, cardList->count, cardNumber);
-        printf("index: %d\n", index);
+        
         if (index == -1) {
             printf("Card not found!\n");
             sleep(1);
@@ -61,7 +48,7 @@ int adminAccessMenu(CARDLIST *cardList) {
                 GetInput("Do you want to add this card to the system?:(yes/no)", answer, 4);
                 if (strcmp(answer, "yes") == 0) {
                     int accessAnswer;
-                     printf("Card added!\n");
+                        printf("Card added!\n");
                     sleep(1);
                     printf("The recently added card has no access by default!\n");
                     sleep(1);
@@ -86,16 +73,15 @@ int adminAccessMenu(CARDLIST *cardList) {
                         printf("Wrong input. Try again!\n");
                         sleep(1);
                     }
-                   
+                    
                     GetInputChar("Press enter to continue", NULL);
-                    //printf("\n");
+                    
                     
                     break;
 
                 } else if (strcmp(answer, "no") == 0) {
                     printf("Card not added!\n");
                     GetInputChar("Press enter to continue", NULL);
-                    //printf("\n");
                     
                     break;
                     
@@ -152,17 +138,25 @@ int adminAccessMenu(CARDLIST *cardList) {
                 }
             }
         }
-    } else if (menuSel3 == 2) {
-        //back
-    } else {
-        printf("Wrong input. Try again!\n");
-        sleep(1);
-        return adminAccessMenu(cardList);     
     }
-    return 0;
+
+
+
+void listCards(CARDLIST *cardList){//funktion som skriver ut alla kort i listan
+
+            for (int i = 0; i < cardList->count; i++) {
+                char accessOrNot[20];
+                if (cardList->lista[i].access == 0) {
+                    strcpy(accessOrNot, "No access");
+                } else {
+                    strcpy(accessOrNot, "Access");
+                }
+                printf("%s %s Added to system %s \n", cardList->lista[i].cardID, accessOrNot, cardList->lista[i].registrationDate);
+                }
+                 GetInputChar("Press enter to continue", NULL);
 }
 
-void fakeTestScanCard(){
+void fakeTestScanCard(){//funktion för att testa att scanna ett kort och se om det finns i listan
     char scanCard[10];
     GetInput("CURRENTLY LAMP IS: Off\nPlease scan card to enter or X to go back to admin menu:\n", scanCard, 10);
     if(strcmp(scanCard, "x") == 0){
@@ -176,8 +170,7 @@ void fakeTestScanCard(){
     }
 }
 
-
-void adminMenu(CARDLIST *cardList) {
+void adminMenu(CARDLIST *cardList) {//funktion för att interagera med adminmenyn
     while (1) {
         printf("Admin Menu:\n");
         printf("\n");
@@ -202,20 +195,9 @@ void adminMenu(CARDLIST *cardList) {
         } else if (sel == 2 && cardList->count == 0) {//List all cards in system
             printf("There is not registered cards in system!\n");
         } else if (sel == 2 && cardList->count > 0) {
-            for (int i = 0; i < cardList->count; i++) {
-                char accessOrNot[20];
-                if (cardList->lista[i].access == 0) {
-                    strcpy(accessOrNot, "No access");
-                } else {
-                    strcpy(accessOrNot, "Access");
-                }
+            listCards(cardList);
 
-                printf("%s %s Added to system %s \n", cardList->lista[i].cardID, accessOrNot, cardList->lista[i].registrationDate);
-            }
-            GetInputChar("Press enter to continue", NULL);
-
-        } else if (sel == 3) 
-        {//add/remove access
+        } else if (sel == 3) {//add/remove access
             adminAccessMenu(cardList);
             
         }else if (sel == 4) {//exit
@@ -233,3 +215,26 @@ void adminMenu(CARDLIST *cardList) {
         }
         }    
     }
+
+    int adminAccessMenu(CARDLIST *cardList) {//submeny för admin innehållande add/remove access
+    printf("CURRENTLY LAMP IS: Orange\n");
+    printf("\n");
+    printf("1. Add/remove access\n");
+    printf("2. Back\n");
+    printf("\n");
+
+    int menuSel3;
+    GetInputInt("Enter choice: ", &menuSel3);
+
+    if (menuSel3 == 1) {
+        addRemoveCardAccess(cardList, cardList->lista->cardID, cardList->lista->access, cardList->lista->registrationDate, 0);
+      
+    } else if (menuSel3 == 2) {
+        //back
+    } else {
+        printf("Wrong input. Try again!\n");
+        sleep(1);
+        return adminAccessMenu(cardList);     
+    }
+    return 0;
+}

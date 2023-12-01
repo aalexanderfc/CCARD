@@ -20,9 +20,7 @@ const char *currentDate() {//funktion som returnerar dagens datum
     return date;
 }
 
-void addCardToList(CARDLIST *cardList, char *cardID, int access, const char *date, int updateDate);
-
-void saveCardListToFile() {
+void saveCardListToFile() {//funktion som sparar kortlistan till fil
     FILE *file = fopen(FILENAME, "w");
     if (file == NULL) {
         perror("Error opening file for writing");
@@ -36,7 +34,7 @@ void saveCardListToFile() {
     fclose(file);
 }
 
-void loadCardListFromFile() {
+void loadCardListFromFile() {//funktion som läser in kortlistan från fil
     FILE *file = fopen(FILENAME, "r");
     if (file != NULL) {
         while (!feof(file)) {
@@ -54,7 +52,7 @@ void loadCardListFromFile() {
 
 }
 
-void cleanupAndExit(int signum) {
+void cleanupAndExit(int signum) {//funktion som avslutar programmet
     saveCardListToFile();
     free(cardList.lista);
     exit(0);
@@ -89,7 +87,7 @@ int getCardIndex(CARD *lista, int count, char *cardID) {
     return -1;
 }
 
-void processCard(char* cardNumber){
+void processCard(char* cardNumber){//funktion som hanterar scanning av kort
     int index = getCardIndex(cardList.lista, cardList.count, cardNumber);
     if(index == -1){
         printf("CURRENTLY LAMP IS: Red\n");
