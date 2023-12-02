@@ -39,26 +39,35 @@ void addRemoveCardAccess(CARDLIST *cardList, char *cardID, const char *date, int
                     sleep(1);
                     printf("Do you want to give access to this card?\n");
                     sleep(1);
+                while (1) {
+                
                     GetInputInt("1. for access, 2. for no access, 3. Go back: ", &accessAnswer);
 
-                    if (accessAnswer == 1) {
+                    if (accessAnswer == 1) 
+                    {
                         addCardToList(cardList, cardNumber, 1, currentDate(), 1);
                         printf("Access granted!\n");
                         sleep(1);
                         printf("\n");
-                } else if (accessAnswer == 2) {
+                        GetInputChar("Press enter to continue", NULL);
+                        break;
+                    } else if (accessAnswer == 2) {
                         addCardToList(cardList, cardNumber, 0, currentDate(), 1);
                         printf("No access!\n");
                         sleep(1);
                         printf("\n");
-                        
-                } else if (accessAnswer == 3) {
+                        GetInputChar("Press enter to continue", NULL);
                         break;
-                } else {
-                    printf("Wrong input. Try again!\n");
-                    sleep(1);
+                    } else if (accessAnswer == 3) {
+                        break;
+                    } else {
+                        printf("Wrong input. Try again!\n");
+                        sleep(1);
 
-                }                 
+                    } 
+            }; 
+                    break;
+                        
                     
 
                 } else if (strcmp(answer, "no") == 0) {
@@ -115,7 +124,7 @@ void addRemoveCardAccess(CARDLIST *cardList, char *cardID, const char *date, int
                 }else {
                     printf("Wrong input! Try again!\n");
                     sleep(1);
-                    
+
                 }
             }
         }
